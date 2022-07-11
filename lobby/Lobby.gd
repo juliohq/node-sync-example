@@ -19,6 +19,7 @@ func _ready():
 
 
 remotesync func start_game():
+	print("Game started")
 	Events.emit_signal("game_started")
 
 
