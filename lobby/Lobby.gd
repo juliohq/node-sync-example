@@ -18,6 +18,10 @@ func _ready():
 	get_tree().connect("connection_failed", self, "_on_connection_failed")
 
 
+remotesync func start_game():
+	Events.emit_signal("game_started")
+
+
 func _enable_buttons():
 	Join.disabled = false
 	Host.disabled = false
@@ -91,7 +95,7 @@ func _on_network_peer_disconnected(id):
 
 
 func _on_Start_pressed():
-	Events.emit_signal("game_started")
+	rpc("start_game")
 
 
 func _on_Cancel_pressed():
