@@ -2,7 +2,9 @@ extends Control
 
 
 const PLAYER_COUNT_FMT = "%d/%d"
+const LOBBY_NAME = preload("res://ui/LobbyName.tscn")
 
+onready var Players = $Margin/Players
 onready var Waiting = $Center/Box/Waiting
 onready var PlayerCount = $Center/Box/PlayerCount
 onready var Join = $Center/Box/Join
@@ -80,6 +82,12 @@ func _on_network_peer_connected(id):
 		Start.show()
 	
 	PlayerCount.text = PLAYER_COUNT_FMT % [get_tree().get_network_connected_peers().size() + 1, Network.MAX_CLIENTS]
+	
+	yield(Network, "player_registered")
+	var n = LOBBY_NAME.instance()
+	n.name = str(id)
+	n.text = Network.player_info[id]
+	Players.add_child(n)
 
 
 # Signal only connected for server
@@ -89,6 +97,11 @@ func _on_network_peer_disconnected(id):
 		Start.hide()
 	
 	PlayerCount.text = PLAYER_COUNT_FMT % [get_tree().get_network_connected_peers().size() + 1, Network.MAX_CLIENTS]
+	
+	for n in Players.get_children():
+		if int(n.name) == id:
+			n.queue_free()
+			break
 
 
 func _on_Start_pressed():

@@ -1,6 +1,8 @@
 extends Node
 
 
+signal player_registered(id, player_name)
+
 const SERVER_IP = "localhost"
 const SERVER_PORT = 8000
 const MAX_CLIENTS = 32
@@ -40,6 +42,8 @@ remote func register_player(player_name):
 	
 	player_info[id] = player_name
 	print("Registered player '%s' with id %d" % [player_name, id])
+	
+	emit_signal("player_registered", id, player_name)
 
 
 func terminate():
