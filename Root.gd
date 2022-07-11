@@ -8,6 +8,8 @@ onready var Current = $Lobby
 
 
 func _ready():
+	get_tree().connect("server_disconnected", Events, "emit_signal", ["game_finished"])
+	
 	Events.connect("game_started", self, "replace_current", [LEVEL])
 	Events.connect("game_finished", self, "replace_current", [LOBBY])
 

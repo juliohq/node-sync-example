@@ -6,6 +6,10 @@ const SERVER_PORT = 8000
 const MAX_CLIENTS = 32
 
 
+func _ready():
+	Events.connect("game_finished", self, "terminate")
+
+
 func join():
 	var peer = NetworkedMultiplayerENet.new()
 	var err = peer.create_client(Network.SERVER_IP, Network.SERVER_PORT)
