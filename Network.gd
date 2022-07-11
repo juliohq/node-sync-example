@@ -6,11 +6,12 @@ const SERVER_PORT = 8000
 const MAX_CLIENTS = 32
 
 var player_name = "player"
+var player_info = {}
 
 
 func _ready():
-	get_tree().connect("network_peer_connected", self, "_on_network_peer_connected")
-	get_tree().connect("network_peer_disconnected", self, "_on_network_peer_disconnected")
+	get_tree().connect("network_peer_connected", self, "_on_player_connected")
+	get_tree().connect("network_peer_disconnected", self, "_on_player_disconnected")
 	
 	Events.connect("game_finished", self, "terminate")
 
@@ -34,7 +35,16 @@ func host():
 	return err
 
 
+remote func register_player(player_name):
+	var id = get_tree().get_rpc_sender_id()
+	
+	player_info[id] = player_name
+	print("Registered player '%s' with id %d" % [player_name, id])
+
+
 func terminate():
+	player_info.clear()
+	
 	var is_network_peer = is_instance_valid(get_tree().network_peer)
 	if is_network_peer:
 		yield(get_tree(), "idle_frame")
@@ -47,9 +57,12 @@ func _exit_tree():
 		print("Terminating network feature...")
 
 
-func _on_network_peer_connected(id):
+func _on_player_connected(id):
+	rpc_id(id, "register_player", player_name)
+	
 	print("Peer %d connected" % id)
 
 
-func _on_network_peer_disconnected(id):
-	print("Peer %d disconnected" % id)
+func _on_player_disconnected(id):
+	print("Unregistered player '%s' with id %d" % [player_info[id], id])
+	player_info.erase(id)
