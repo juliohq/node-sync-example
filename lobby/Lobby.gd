@@ -80,8 +80,6 @@ func _on_network_peer_connected(id):
 		Start.show()
 	
 	PlayerCount.text = PLAYER_COUNT_FMT % [get_tree().get_network_connected_peers().size() + 1, Network.MAX_CLIENTS]
-	
-	print("Peer %d connected" % id)
 
 
 # Signal only connected for server
@@ -91,8 +89,6 @@ func _on_network_peer_disconnected(id):
 		Start.hide()
 	
 	PlayerCount.text = PLAYER_COUNT_FMT % [get_tree().get_network_connected_peers().size() + 1, Network.MAX_CLIENTS]
-	
-	prints("Peer %d disconnected" % id)
 
 
 func _on_Start_pressed():

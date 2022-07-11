@@ -7,6 +7,9 @@ const MAX_CLIENTS = 32
 
 
 func _ready():
+	get_tree().connect("network_peer_connected", self, "_on_network_peer_connected")
+	get_tree().connect("network_peer_disconnected", self, "_on_network_peer_disconnected")
+	
 	Events.connect("game_finished", self, "terminate")
 
 
@@ -40,3 +43,11 @@ func terminate():
 func _exit_tree():
 	if terminate():
 		print("Terminating network feature...")
+
+
+func _on_network_peer_connected(id):
+	print("Peer %d connected" % id)
+
+
+func _on_network_peer_disconnected(id):
+	print("Peer %d disconnected" % id)
