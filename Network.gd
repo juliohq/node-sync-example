@@ -5,6 +5,8 @@ const SERVER_IP = "localhost"
 const SERVER_PORT = 8000
 const MAX_CLIENTS = 32
 
+var player_name = "player"
+
 
 func _ready():
 	get_tree().connect("network_peer_connected", self, "_on_network_peer_connected")
