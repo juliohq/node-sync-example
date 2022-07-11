@@ -6,6 +6,8 @@ const VIEW = preload("res://world/View.tscn")
 
 var players_done = []
 
+onready var Sort = $Sort
+
 
 func _ready():
 	if get_tree().is_network_server():
@@ -22,7 +24,7 @@ remotesync func pre_configure_game():
 	my_player.name = str(id)
 	my_player.set_network_master(id)
 	my_player.player_name = Network.player_name
-	add_child(my_player)
+	Sort.add_child(my_player)
 	var view = VIEW.instance()
 	my_player.call_deferred("add_child", view)
 	
@@ -32,7 +34,7 @@ remotesync func pre_configure_game():
 		p.name = str(player)
 		p.set_network_master(player)
 		p.player_name = Network.player_info[player]
-		add_child(p)
+		Sort.add_child(p)
 	
 	if not get_tree().is_network_server():
 		rpc_id(1, "done_preconfiguring")
