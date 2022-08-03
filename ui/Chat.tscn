@@ -1,0 +1,10 @@
+[gd_scene format=2]
+
+[node name="Chat" type="VBoxContainer"]
+margin_left = 32.0
+margin_top = 32.0
+margin_right = 288.0
+margin_bottom = 224.0
+rect_min_size = Vector2( 256, 192 )
+size_flags_horizontal = 0
+size_flags_vertical = 0
