@@ -28,5 +28,6 @@ size_flags_vertical = 3
 margin_top = 168.0
 margin_right = 256.0
 margin_bottom = 192.0
+caret_blink = true
 
 [connection signal="text_entered" from="MessageLine" to="." method="_on_text_entered"]
