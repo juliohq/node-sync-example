@@ -5,3 +5,8 @@ margin_right = 46.0
 margin_bottom = 14.0
 text = "%s: %s"
 autowrap = true
+
+[node name="AutoFree" type="Timer" parent="."]
+autostart = true
+
+[connection signal="timeout" from="AutoFree" to="." method="queue_free"]
