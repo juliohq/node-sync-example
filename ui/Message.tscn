@@ -4,3 +4,4 @@
 margin_right = 46.0
 margin_bottom = 14.0
 text = "%s: %s"
+autowrap = true
