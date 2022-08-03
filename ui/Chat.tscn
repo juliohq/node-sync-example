@@ -18,6 +18,12 @@ margin_bottom = 164.0
 size_flags_vertical = 3
 scroll_horizontal_enabled = false
 
+[node name="List" type="VBoxContainer" parent="Scroll"]
+margin_right = 256.0
+margin_bottom = 164.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
 [node name="MessageLine" type="LineEdit" parent="."]
 margin_top = 168.0
 margin_right = 256.0
