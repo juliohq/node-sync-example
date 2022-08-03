@@ -7,6 +7,7 @@ text = "%s: %s"
 autowrap = true
 
 [node name="AutoFree" type="Timer" parent="."]
+wait_time = 15.0
 autostart = true
 
 [connection signal="timeout" from="AutoFree" to="." method="queue_free"]
