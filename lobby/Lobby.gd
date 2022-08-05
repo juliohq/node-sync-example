@@ -7,6 +7,7 @@ const LOBBY_NAME = preload("res://ui/LobbyName.tscn")
 onready var Players = $Margin/Players
 onready var Waiting = $Center/Box/Waiting
 onready var PlayerCount = $Center/Box/PlayerCount
+onready var IPEdit = $Center/Box/IPEdit
 onready var Join = $Center/Box/Join
 onready var Host = $Center/Box/Host
 onready var Start = $Center/Box/Start
