@@ -26,14 +26,14 @@ func join():
 	return err
 
 
-func host():
+func host(server_port=SERVER_PORT):
 	var peer = NetworkedMultiplayerENet.new()
-	var err = peer.create_server(Network.SERVER_PORT)
+	var err = peer.create_server(server_port)
 	if err == OK:
 		print("Created server successfully")
 		get_tree().network_peer = peer
 	else:
-		prints("Error creating server:", err)
+		print("Error creating server with port %d: %d" % [server_port, err])
 	return err
 
 
