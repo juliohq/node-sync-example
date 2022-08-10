@@ -18,11 +18,13 @@ func _ready():
 	Events.connect("game_finished", self, "terminate")
 
 
-func join():
+func join(server_ip=SERVER_IP, server_port=SERVER_PORT):
 	var peer = NetworkedMultiplayerENet.new()
-	var err = peer.create_client(Network.SERVER_IP, Network.SERVER_PORT)
+	var err = peer.create_client(server_ip, server_port)
 	if err == OK:
 		get_tree().network_peer = peer
+	else:
+		print("Error joining server (%s:%d): %d", [server_ip, server_port, err])
 	return err
 
 
