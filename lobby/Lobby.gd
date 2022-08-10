@@ -7,7 +7,8 @@ const LOBBY_NAME = preload("res://ui/LobbyName.tscn")
 onready var Players = $Margin/Players
 onready var Waiting = $Center/Box/Waiting
 onready var PlayerCount = $Center/Box/PlayerCount
-onready var IPEdit = $Center/Box/IPEdit
+onready var IPEdit = $Center/Box/Address/IPEdit
+onready var PortEdit = $Center/Box/Address/Port
 onready var Join = $Center/Box/Join
 onready var Host = $Center/Box/Host
 onready var Start = $Center/Box/Start
@@ -37,14 +38,24 @@ func _disable_buttons():
 
 
 func join():
+	if IPEdit.text.empty() and PortEdit.text.empty():
+		print("Please, input an IP address and a port to connect")
+		return
+	
 	_disable_buttons()
-	if Network.join() == OK:
+	if Network.join(IPEdit.text, int(PortEdit.text)) == OK:
 		JoinTimeout.start()
+	else:
+		_enable_buttons()
 
 
 func host():
+	if PortEdit.text.empty():
+		print("Please, input a port to host")
+		return
+	
 	_disable_buttons()
-	if Network.host() == OK:
+	if Network.host(int(PortEdit.text)) == OK:
 		get_tree().connect("network_peer_connected", self, "_on_network_peer_connected")
 		get_tree().connect("network_peer_disconnected", self, "_on_network_peer_disconnected")
 		
@@ -52,6 +63,8 @@ func host():
 		PlayerCount.show()
 		PlayerCount.text = PLAYER_COUNT_FMT % [get_tree().get_network_connected_peers().size() + 1, Network.MAX_CLIENTS]
 		Cancel.show()
+	else:
+		_enable_buttons()
 
 
 func _on_connected_to_server():

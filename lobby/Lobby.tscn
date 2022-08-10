@@ -28,9 +28,9 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 
 [node name="Box" type="VBoxContainer" parent="Center"]
-margin_left = 464.0
+margin_left = 394.0
 margin_top = 236.0
-margin_right = 560.0
+margin_right = 630.0
 margin_bottom = 364.0
 custom_constants/separation = 32
 
@@ -50,21 +50,37 @@ text = "1/32"
 align = 1
 valign = 1
 
-[node name="IPEdit" type="LineEdit" parent="Center/Box"]
-margin_right = 96.0
+[node name="Address" type="HBoxContainer" parent="Center/Box"]
+margin_right = 236.0
 margin_bottom = 24.0
+
+[node name="IPEdit" type="LineEdit" parent="Center/Box/Address"]
+margin_right = 116.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 116, 24 )
 placeholder_text = "IP ADDRESS"
 
+[node name="Port" type="LineEdit" parent="Center/Box/Address"]
+margin_left = 120.0
+margin_right = 236.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 116, 24 )
+placeholder_text = "PORT"
+
 [node name="Join" type="Button" parent="Center/Box"]
+margin_left = 73.0
 margin_top = 56.0
-margin_right = 96.0
+margin_right = 163.0
 margin_bottom = 76.0
+size_flags_horizontal = 4
 text = "JOIN SERVER"
 
 [node name="Host" type="Button" parent="Center/Box"]
+margin_left = 70.0
 margin_top = 108.0
-margin_right = 96.0
+margin_right = 166.0
 margin_bottom = 128.0
+size_flags_horizontal = 4
 text = "HOST SERVER"
 
 [node name="Start" type="Button" parent="Center/Box"]
